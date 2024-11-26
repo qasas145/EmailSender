@@ -9,16 +9,6 @@ public class EmailController : ControllerBase {
     }
     [HttpPost]
     public async Task<IActionResult> SendEmail(EmailViewModel vm) {
-        Console.WriteLine(vm.ToEmail);
-        Console.WriteLine(vm.Subject);
-        Console.WriteLine(vm.Body);
-        if (vm.Attachments != null) {
-            foreach (var file in vm.Attachments)
-            {
-                Console.WriteLine(file.FileName);
-            }
-        }
-        Console.WriteLine();
         await _emailService.SendEmailAsync(vm.ToEmail, vm.Subject, vm.Body, vm.Attachments);
         return Ok("The email has been sent");
     }
